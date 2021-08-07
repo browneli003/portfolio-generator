@@ -131,11 +131,23 @@ promptUser()
   .then(portfolioData => {
     console.log(portfolioData);
     const pageHTML = generatePage(portfolioData);
-   fs.writeFile('./index.html', pageHTML, err => {
-   if (err) throw new Error(err);
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+   if (err) {
+  console.log(err);
+  return;
+   }
+  })
    console.log('Page created! Check out index.html in this directory to see it!');
+   
+   fs.copyFile('./module-9-stylesheet/style.css', './dist/style.css', err => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Style sheet copied successfully!');
     });
   });
+
 //console.log(profileDataArgs);
 
 // Notice the lack of parentheses around the `profileDataArr` parameter?
